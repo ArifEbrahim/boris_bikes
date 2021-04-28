@@ -9,6 +9,7 @@ attr_reader :bike
   end
 
   def dock(bike)
+    raise "Error: no spaces" if !@bike.nil?
     @bike = bike
   end
 end 

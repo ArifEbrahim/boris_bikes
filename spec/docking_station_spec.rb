@@ -33,5 +33,10 @@ RSpec.describe DockingStation do
     expect { subject.release_bike }.to raise_error(RuntimeError)
   end
 
-
+  describe "#dock" do
+    it "raises an error when trying to dock a bike when full" do
+      subject.dock(Bike.new)
+      expect { subject.dock(Bike.new) }.to raise_error(RuntimeError)
+    end
+  end
 end
