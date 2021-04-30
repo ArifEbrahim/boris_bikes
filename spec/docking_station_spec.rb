@@ -3,7 +3,7 @@ require 'docking_station'
 RSpec.describe DockingStation do
   describe "#release_bike" do
     it "releases a bike" do
-      bike = (double :bike)
+      bike = double(:working? => true)
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
@@ -13,20 +13,19 @@ RSpec.describe DockingStation do
     end
 
     it "releases a working bike" do
-      subject.dock(double :bike)
-      bike = subject.release_bike
-      expect(bike).to be_working
+      bike = double(:working? => true)
+      subject.dock(bike)
+      expect(subject.release_bike).to be bike
     end
 
     it "does not release a broken bike" do
-      bike = (double :bike)
-      bike.report_broken
+      bike = double(:working? => false)
       subject.dock(bike)
       expect{ subject.release_bike }.to raise_error(RuntimeError)
     end
   
     it "returns a docked bike" do
-      bike = (double :bike)
+      bike = double(:working? => true)
       subject.dock(bike)
       expect(subject.release_bike).to eq(bike)
     end
