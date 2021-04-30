@@ -12,10 +12,8 @@ class DockingStation
 
   def release_bike
     raise "Error: there are no bikes" if empty?
-    @bikes.each do |bike|
-      return bike if bike.working?
-    end
-    "Sorry,no working bikes available"
+    @bikes.each { |bike| return bike if bike.working? }
+    raise "Error: there are no bikes" 
   end
 
   def dock(bike)
